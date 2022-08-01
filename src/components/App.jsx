@@ -4,9 +4,7 @@ import { Form } from './Form/Form';
 import { Filter } from './Form/Filter/Filter';
 import css from './App.module.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-// import { ContactElement } from './Form/ContactList/ContactElement';
-// import { nanoid } from 'nanoid'
-// import { ContactList } from "./ContactList/ContactList"
+
 
 export class App extends Component {
   state = {
