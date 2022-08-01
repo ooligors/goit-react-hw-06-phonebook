@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { nanoid } from 'nanoid'
-
+import css from './Form.module.css'
 export class Form extends Component {
     state = {
         // contacts: [],
@@ -37,17 +37,17 @@ export class Form extends Component {
   }
 
 
-    render() {
+  render() {
 
-        return (
+    return (
       
    
-           <form onSubmit={this.onFormSubmit}>
-          <label htmlFor='name'>
+      <form className={css.form} onSubmit={this.onFormSubmit}>
+          <label className={css.label} htmlFor='name'>
                     Name
             </label>
-            <br />
-        <input
+           
+        <input  className={css.input}
           type="text"
             name="name"
             value={this.state.name}
@@ -57,11 +57,11 @@ export class Form extends Component {
           required
             />
             
-<label htmlFor='number'>
-                    number
+<label  className={css.label} htmlFor='number'>
+                    Number
             </label>
             
-            <input
+            <input className={css.input}
   type="tel"
               name="number"
               value={this.state.number}
@@ -71,7 +71,7 @@ export class Form extends Component {
   required
             />
            
-            <button type="submit">Add Contact</button>
+            <button className={css.btn} type="submit">Add Contact</button>
           </form>
         )
     }

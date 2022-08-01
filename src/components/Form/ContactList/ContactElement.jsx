@@ -1,4 +1,5 @@
 import React from "react";
+import css from "./ContactElement.module.css";
 export const ContactElement = ({ id, name, number, onClick }) => { 
  
 //  onClick = (e) => {
@@ -9,7 +10,7 @@ export const ContactElement = ({ id, name, number, onClick }) => {
 
     return (
         <li key={id}>
-          <span>{name}: {number}</span>
+          <span className={css.span}>{name}: {number}</span>
           
             <button onClick={() => onClick(id)}>
                 {/* id={id} type="button" */}

@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { ContactList } from './Form/ContactList/ContactList';
 import { Form } from './Form/Form';
 import { Filter } from './Form/Filter/Filter';
+import css from './App.module.css';
 // import { ContactElement } from './Form/ContactList/ContactElement';
 // import { nanoid } from 'nanoid'
 // import { ContactList } from "./ContactList/ContactList"
@@ -63,6 +64,7 @@ export class App extends Component {
     return (
       <div
         style={{
+          backgroundColor: '#f0f0f0',
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
@@ -72,8 +74,7 @@ export class App extends Component {
         }}
       >
         <>
-          <h1>Phonebook</h1>
-
+          <h1 className={css.h1}>Phonebook</h1>
           <Form onSubmit={this.onFormSubmitHandler}></Form>
 
           {/* <ContactList contacts={this.state.contacts} /> */}
