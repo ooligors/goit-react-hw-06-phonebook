@@ -15,7 +15,7 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: ''
+    filter: '',
   };
 
   onInputChange = event => {
@@ -26,29 +26,32 @@ export class App extends Component {
   };
 
   onFormSubmitHandler = contact => {
+
+    if (this.state.contacts.some(item => item.name === contact.name)) { 
+      alert(`${contact.name} is already in the contacts list`);
+      return;
+    }
     this.setState(() => {
       return {
         contacts: this.state.contacts.concat(contact),
       };
     });
-  }
+  };
 
- 
-
-  onChangeFilter = event => { 
+  onChangeFilter = event => {
     console.log(event.target.value);
     this.setState(() => {
       return {
         filter: event.target.value,
-      }
-    })
-  }
+      };
+    });
+  };
 
-   onClick = (id) => {
-    this.setState( {
-     contacts:[ ...this.state.contacts.filter(contact => contact.id !== id)]
-    })
-    }
+  onClick = id => {
+    this.setState({
+      contacts: [...this.state.contacts.filter(contact => contact.id !== id)],
+    });
+  };
   // onNameChange = (event) => {
   //   this.setState({name: event.target.value})
   // }
@@ -58,11 +61,13 @@ export class App extends Component {
   //  }
 
   render() {
- const normilizedFilter = this.state.filter.toLowerCase();
-    const filterList = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(normilizedFilter))
+    const normilizedFilter = this.state.filter.toLowerCase();
+    const filterList = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normilizedFilter)
+    );
 
     return (
-      <div
+      <div className={css.app}
         style={{
           backgroundColor: '#f0f0f0',
           height: '100vh',
@@ -77,13 +82,16 @@ export class App extends Component {
           <h1 className={css.h1}>Phonebook</h1>
           <Form onSubmit={this.onFormSubmitHandler}></Form>
 
-          {/* <ContactList contacts={this.state.contacts} /> */}
+          <Filter value={filterList} onChange={this.onChangeFilter} />
 
-          <Filter value={filterList} onChange={this.onChangeFilter } />
-
-     { this.state.filter? <ContactList contacts={filterList}  /> : <ContactList contacts={this.state.contacts} onClick={this.onClick}/>}
-            
-
+          {this.state.filter ? (
+            <ContactList contacts={filterList} />
+          ) : (
+            <ContactList
+              contacts={this.state.contacts}
+              onClick={this.onClick}
+            />
+          )}
         </>
       </div>
     );

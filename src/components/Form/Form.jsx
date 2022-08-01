@@ -20,11 +20,9 @@ export class Form extends Component {
         event.preventDefault();
         console.log(this.state);
         console.log(event.target.elements.name.value);
-        if (this.state.name === event.target.elements.name.value || this.state.number === event.target.elements.name.value) {
-            alert(`${event.target.elements.name.value} is already in the contacts list`);
-            return;
-        }
-        const contact = { id: nanoid(), name:event.target.elements.name.value, number:event.target.elements.number.value }
+       
+        const contact = { id: nanoid(), name: event.target.elements.name.value, number: event.target.elements.number.value }
+      
         this.props.onSubmit(contact);
         this.resetForm();
     }

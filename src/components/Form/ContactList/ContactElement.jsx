@@ -1,22 +1,13 @@
-import React from "react";
-import css from "./ContactElement.module.css";
-export const ContactElement = ({ id, name, number, onClick }) => { 
- 
-//  onClick = (e) => {
-//     this.setState( {
-//      contacts:[ ...this.state.contacts.filter(contact => contact.id !== Number(e.target.id))]
-//     })
-//     }
+import React from 'react';
+import css from './ContactElement.module.css';
+export const ContactElement = ({ id, name, number, onClick }) => {
+  return (
+    <li className={css.li} key={id}>
+      <span className={css.span}>
+        {name}: {number}
+      </span>
 
-    return (
-        <li key={id}>
-          <span className={css.span}>{name}: {number}</span>
-          
-            <button onClick={() => onClick(id)}>
-                {/* id={id} type="button" */}
-            Delete  
-          </button>
-        </li>
-    );
-    }
-     
+      <button className={css.btn} onClick={() => onClick(id)}>Delete</button>
+    </li>
+  );
+};
