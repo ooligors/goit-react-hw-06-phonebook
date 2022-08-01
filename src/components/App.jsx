@@ -3,6 +3,7 @@ import { ContactList } from './Form/ContactList/ContactList';
 import { Form } from './Form/Form';
 import { Filter } from './Form/Filter/Filter';
 import css from './App.module.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import { ContactElement } from './Form/ContactList/ContactElement';
 // import { nanoid } from 'nanoid'
 // import { ContactList } from "./ContactList/ContactList"
@@ -28,7 +29,8 @@ export class App extends Component {
   onFormSubmitHandler = contact => {
 
     if (this.state.contacts.some(item => item.name === contact.name)) { 
-      alert(`${contact.name} is already in the contacts list`);
+      // alert(`${contact.name} is already in the contacts list`);
+      Notify.warning(`${contact.name} is already in the contacts list`);
       return;
     }
     this.setState(() => {
