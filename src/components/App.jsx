@@ -1,10 +1,9 @@
 import { Component } from 'react';
-import { ContactList } from './Form/ContactList/ContactList';
+import { ContactList } from './ContactList/ContactList';
 import { Form } from './Form/Form';
-import { Filter } from './Form/Filter/Filter';
+import { Filter } from './Filter/Filter';
 import css from './App.module.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 
 export class App extends Component {
   state = {
@@ -25,8 +24,7 @@ export class App extends Component {
   };
 
   onFormSubmitHandler = contact => {
-
-    if (this.state.contacts.some(item => item.name === contact.name)) { 
+    if (this.state.contacts.some(item => item.name === contact.name)) {
       // alert(`${contact.name} is already in the contacts list`);
       Notify.warning(`${contact.name} is already in the contacts list`);
       return;
@@ -47,7 +45,19 @@ export class App extends Component {
     });
   };
 
-  onClick = id => {
+  filterList = () => {
+    const normilizedFilter = this.state.filter.toLowerCase();
+    const filterList = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normilizedFilter)
+    );
+    return filterList;
+
+    // return this.state.contacts.filter(item => {
+    //   return item.name.toLowerCase().includes(this.state.filter.toLowerCase());
+    // });
+  };
+
+  onDelete = id => {
     this.setState({
       contacts: [...this.state.contacts.filter(contact => contact.id !== id)],
     });
@@ -61,13 +71,9 @@ export class App extends Component {
   //  }
 
   render() {
-    const normilizedFilter = this.state.filter.toLowerCase();
-    const filterList = this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normilizedFilter)
-    );
-
     return (
-      <div className={css.app}
+      <div
+        className={css.app}
         style={{
           backgroundColor: '#f0f0f0',
           height: '100vh',
@@ -82,16 +88,9 @@ export class App extends Component {
           <h1 className={css.h1}>Phonebook</h1>
           <Form onSubmit={this.onFormSubmitHandler}></Form>
 
-          <Filter value={filterList} onChange={this.onChangeFilter} />
+          <Filter value={this.state.filter} onChange={this.onChangeFilter} />
 
-          {this.state.filter ? (
-            <ContactList contacts={filterList} />
-          ) : (
-            <ContactList
-              contacts={this.state.contacts}
-              onClick={this.onClick}
-            />
-          )}
+          <ContactList contacts={this.filterList()} onDelete={this.onDelete} />
         </>
       </div>
     );
