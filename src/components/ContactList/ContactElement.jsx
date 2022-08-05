@@ -1,21 +1,23 @@
 import React from 'react';
 import css from './ContactElement.module.css';
-import PropTypes from 'prop-types';
-export const ContactElement = ({ id, name, number, onDelete }) => {
+// import PropTypes from 'prop-types';
+export const ContactElement = ({ idContact, name, number, onDelete }) => {
+  console.log(idContact);
   return (
-    <li className={css.li} key={id}>
+    <li className={css.li}>
       <span className={css.span}>
         {name}: {number}
       </span>
 
-      <button className={css.btn} onClick={onDelete}>
+      <button id={name} className={css.btn} onClick={() => { onDelete(idContact) }}>
         Delete
       </button>
     </li>
   );
 };
-ContactElement.propTypes = {
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-
-};
+// ContactElement.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   number: PropTypes.string.isRequired,
+//   onDelete: PropTypes.func.isRequired,
+//   id: PropTypes.string.isRequired,
+// };

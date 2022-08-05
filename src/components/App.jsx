@@ -58,9 +58,9 @@ export class App extends Component {
   };
 
   onDelete = id => {
-    this.setState({
-      contacts: [...this.state.contacts.filter(contact => contact.id !== id)],
-    });
+    this.setState(({ contacts })=>({
+      contacts: [...contacts.filter(contact => contact.id !== id)],
+    }));
   };
   // onNameChange = (event) => {
   //   this.setState({name: event.target.value})
