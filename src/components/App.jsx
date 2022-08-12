@@ -15,6 +15,18 @@ export class App extends Component {
     ],
     filter: '',
   };
+  componentDidUpdate(prevProps, prevState) { 
+    if (prevState.contacts !== this.state.contacts) {
+      Notify.success('Contacts updated');
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+  componentDidMount() { 
+    const contacts = localStorage.getItem('contacts');
+    if (contacts) {
+      this.setState({ contacts: JSON.parse(contacts) });
+    }
+  }
 
   onInputChange = event => {
     const { name, value } = event.target;
