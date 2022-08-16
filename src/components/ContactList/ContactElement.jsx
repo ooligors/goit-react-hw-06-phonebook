@@ -2,7 +2,7 @@ import React from 'react';
 import css from './ContactElement.module.css';
 // import PropTypes from 'prop-types';
 export const ContactElement = ({ idContact, name, number, onDelete }) => {
-  console.log(idContact);
+  // console.log(idContact);
   return (
     <li className={css.li}>
       <span className={css.span}>
